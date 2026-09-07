@@ -14,8 +14,8 @@ API REST para la gestión de un catálogo de semillas, con autenticación de usu
 
 1. Clona el repositorio:
    ```bash
-   git clone <url-del-repositorio>
-   cd semillas
+   git clone https://github.com/fernandonae/seeds.git
+   cd seeds
    ```
 
 2. Instala las dependencias:
