@@ -7,7 +7,7 @@ import CartDrawer from './CartDrawer';
 
 const navLinks = [
   { label: 'Catálogo', to: '/catalogo' },
-  { label: 'Nosotros', href: '#' },
+  { label: 'Nosotros', to: '/nosotros' },
   { label: 'Contacto', href: '#' },
 ];
 

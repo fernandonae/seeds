@@ -5,6 +5,7 @@ import HeroCarousel from './components/HeroCarousel';
 import ProtectedRoute from './components/ProtectedRoute';
 import AdminPanel from './pages/AdminPanel';
 import Catalogo from './pages/Catalogo';
+import Nosotros from './pages/Nosotros';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 
@@ -28,6 +29,7 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/catalogo" element={<Catalogo />} />
+            <Route path="/nosotros" element={<Nosotros />} />
             <Route
               path="/admin"
               element={
