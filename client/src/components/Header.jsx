@@ -18,6 +18,16 @@ export default function Header() {
   const { user, logout } = useAuth();
   const { totalItems } = useCart();
 
+  const handleUserClick = () => {
+    if (user) {
+      if (confirm(`¿Cerrar sesión de ${user.nombre}?`)) {
+        logout();
+      }
+    } else {
+      setShowLogin(true);
+    }
+  };
+
   return (
     <>
       <header className="sticky top-0 z-40 bg-[#F5F6EF]/95 backdrop-blur border-b border-stone-200">
@@ -99,8 +109,9 @@ export default function Header() {
             )}
           </div>
 
-          {/* Ícono carrito + botón hamburguesa — visible solo en celular */}
+          {/* Ícono carrito + Botón circular Usuario + Menú hamburguesa — visible solo en celular */}
           <div className="md:hidden flex items-center gap-2">
+            {/* Botón carrito */}
             <button
               onClick={() => setShowCart(true)}
               className="relative w-9 h-9 flex items-center justify-center rounded-lg hover:bg-stone-100 transition-colors"
@@ -114,6 +125,21 @@ export default function Header() {
               )}
             </button>
 
+            {/* Botón circular de Usuario / Login */}
+            <button
+              onClick={handleUserClick}
+              className={`w-9 h-9 rounded-full flex items-center justify-center transition-all border ${
+                user
+                  ? 'bg-[#4A5D3A] text-white border-[#4A5D3A] font-bold text-xs uppercase shadow-sm'
+                  : 'bg-stone-100 text-stone-700 border-stone-300 hover:bg-stone-200 text-base'
+              }`}
+              aria-label={user ? `Cuenta de ${user.nombre}` : 'Iniciar sesión'}
+              title={user ? `Hola, ${user.nombre}. Toca para salir` : 'Iniciar sesión'}
+            >
+              {user ? user.nombre?.charAt(0) : '👤'}
+            </button>
+
+            {/* Botón menú hamburguesa */}
             <button
               onClick={() => setMenuOpen(!menuOpen)}
               className="text-stone-700 text-2xl w-8 h-8 flex items-center justify-center"
@@ -133,7 +159,7 @@ export default function Header() {
                   key={link.label}
                   to={link.to}
                   onClick={() => setMenuOpen(false)}
-                  className="text-sm text-stone-700"
+                  className="text-sm text-stone-700 font-medium hover:text-[#4A5D3A]"
                 >
                   {link.label}
                 </Link>
@@ -142,7 +168,7 @@ export default function Header() {
                   key={link.label}
                   href={link.href}
                   onClick={() => setMenuOpen(false)}
-                  className="text-sm text-stone-700"
+                  className="text-sm text-stone-700 font-medium hover:text-[#4A5D3A]"
                 >
                   {link.label}
                 </a>
@@ -154,38 +180,11 @@ export default function Header() {
               <Link
                 to="/admin"
                 onClick={() => setMenuOpen(false)}
-                className="text-sm text-[#4A5D3A] font-medium"
+                className="text-sm text-[#4A5D3A] font-semibold"
               >
                 Panel admin
               </Link>
             )}
-
-            <div className="pt-3 border-t border-stone-200">
-              {user ? (
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-stone-600">Hola, {user.nombre}</span>
-                  <button
-                    onClick={() => {
-                      logout();
-                      setMenuOpen(false);
-                    }}
-                    className="text-sm border border-stone-300 rounded-lg px-4 py-1.5"
-                  >
-                    Salir
-                  </button>
-                </div>
-              ) : (
-                <button
-                  onClick={() => {
-                    setShowLogin(true);
-                    setMenuOpen(false);
-                  }}
-                  className="w-full text-sm bg-[#4A5D3A] text-white rounded-lg px-4 py-2"
-                >
-                  Iniciar sesión
-                </button>
-              )}
-            </div>
           </div>
         )}
       </header>
