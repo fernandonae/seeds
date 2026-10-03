@@ -8,7 +8,7 @@ import CartDrawer from './CartDrawer';
 const navLinks = [
   { label: 'Catálogo', to: '/catalogo' },
   { label: 'Nosotros', to: '/nosotros' },
-  { label: 'Contacto', href: '#' },
+  { label: 'Contacto', to: '/contacto' },
 ];
 
 export default function Header() {

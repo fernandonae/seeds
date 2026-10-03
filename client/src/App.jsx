@@ -6,6 +6,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import AdminPanel from './pages/AdminPanel';
 import Catalogo from './pages/Catalogo';
 import Nosotros from './pages/Nosotros';
+import Contacto from './pages/Contacto';
 import { AuthProvider } from './context/AuthContext';
 import { CartProvider } from './context/CartContext';
 
@@ -30,6 +31,7 @@ function App() {
             <Route path="/" element={<Home />} />
             <Route path="/catalogo" element={<Catalogo />} />
             <Route path="/nosotros" element={<Nosotros />} />
+            <Route path="/contacto" element={<Contacto />} />
             <Route
               path="/admin"
               element={
