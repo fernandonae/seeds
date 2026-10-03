@@ -26,7 +26,15 @@ const productSchema = new mongoose.Schema(
       type: String,
       required: true,
       trim: true
-    }
+    },
+    imagenes: {
+     type: [String], // URLs de las imágenes
+     default: []
+    },
+    destacado: {
+  type: Boolean,
+  default: false
+  }
   },
   {
     timestamps: true

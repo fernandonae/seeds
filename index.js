@@ -5,7 +5,9 @@ import dotenv from 'dotenv';
 import { connectDB } from './src/config/db.js';
 import authRoutes from './src/routes/auth.routes.js';
 import productRoutes from './src/routes/product.routes.js';
+import orderRoutes from './src/routes/order.routes.js';
 import { errorHandler, notFound } from './src/middlewares/error.middleware.js';
+import uploadRoutes from './src/routes/upload.routes.js';
 
 dotenv.config();
 
@@ -18,7 +20,9 @@ app.use(morgan('dev'));
 app.use(express.json());
 
 app.use('/api', authRoutes);
+app.use('/api/orders', orderRoutes);
 app.use('/api/products', productRoutes);
+app.use('/api/upload', uploadRoutes);
 
 app.get('/', (req, res) => {
   res.send('API de Semillas funcionando correctamente');
