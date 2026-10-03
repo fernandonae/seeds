@@ -32,9 +32,13 @@ const productSchema = new mongoose.Schema(
      default: []
     },
     destacado: {
-  type: Boolean,
-  default: false
-  }
+     type: Boolean,
+     default: false
+    },
+    enCarrusel: {
+      type: Boolean,
+      default: false
+    }
   },
   {
     timestamps: true

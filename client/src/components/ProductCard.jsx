@@ -10,8 +10,18 @@ export default function ProductCard({ product, onCambio }) {
   const toggleDestacado = async () => {
     try {
       await api.put(`/products/${product._id}`, {
-        ...product,
         destacado: !product.destacado,
+      });
+      onCambio?.();
+    } catch (err) {
+      alert('No se pudo actualizar el producto');
+    }
+  };
+
+  const toggleCarrusel = async () => {
+    try {
+      await api.put(`/products/${product._id}`, {
+        enCarrusel: !product.enCarrusel,
       });
       onCambio?.();
     } catch (err) {
@@ -33,6 +43,7 @@ export default function ProductCard({ product, onCambio }) {
           <span className="text-lg font-semibold text-stone-900">${product.precio}</span>
           <span className="text-xs text-stone-400">{product.stock} disponibles</span>
         </div>
+
         <button
           onClick={() => addToCart(product)}
           disabled={product.stock === 0}
@@ -42,16 +53,29 @@ export default function ProductCard({ product, onCambio }) {
         </button>
 
         {user?.rol === 'admin' && (
-          <button
-            onClick={toggleDestacado}
-            className={`mt-2 w-full text-xs rounded-lg px-4 py-1.5 border transition-colors ${
-              product.destacado
-                ? 'border-amber-400 text-amber-700 bg-amber-50 hover:bg-amber-100'
-                : 'border-stone-300 text-stone-600 hover:bg-stone-100'
-            }`}
-          >
-            {product.destacado ? '★ Quitar del inicio' : '☆ Añadir al inicio'}
-          </button>
+          <div className="flex flex-col gap-1.5 mt-2">
+            <button
+              onClick={toggleDestacado}
+              className={`w-full text-xs rounded-lg px-4 py-1.5 border transition-colors ${
+                product.destacado
+                  ? 'border-amber-400 text-amber-700 bg-amber-50 hover:bg-amber-100'
+                  : 'border-stone-300 text-stone-600 hover:bg-stone-100'
+              }`}
+            >
+              {product.destacado ? '★ Quitar del inicio' : '☆ Añadir al inicio'}
+            </button>
+
+            <button
+              onClick={toggleCarrusel}
+              className={`w-full text-xs rounded-lg px-4 py-1.5 border transition-colors ${
+                product.enCarrusel
+                  ? 'border-emerald-500 text-emerald-700 bg-emerald-50 hover:bg-emerald-100'
+                  : 'border-stone-300 text-stone-600 hover:bg-stone-100'
+              }`}
+            >
+              {product.enCarrusel ? '🎠 Quitar del carrusel' : '🎠 Agregar al carrusel'}
+            </button>
+          </div>
         )}
       </div>
     </div>
